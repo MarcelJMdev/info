@@ -1,10 +1,149 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Meine Website</title>
-  </head>
-  <body>
-    <h1>Willkommen auf meiner Website!</h1>
-    <p>Diese Seite wird von GitHub gehostet 😎</p>
-  </body>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAA_AY | Offizielle Seite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0e0e0e;
+      color: #ffffff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #111;
+      padding: 2rem 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      animation: fadeInDown 1s ease-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: #00ffcc;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    .content {
+      padding: 3rem 1rem;
+    }
+
+    .card {
+      background: #1a1a1a;
+      margin: 1.5rem auto;
+      max-width: 600px;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin: 1rem;
+      background-color: #00ffcc;
+      color: black;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .button:hover {
+      background-color: #00e6b3;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #111;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc;
+      }
+      to {
+        text-shadow: 0 0 15px #00e6b3, 0 0 20px #00e6b3, 0 0 25px #00e6b3;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ZAA_AY</h1>
+    <p>Willkommen auf meiner offiziellen Webseite</p>
+  </header>
+
+  <div class="content">
+    <div class="card">
+      <h2>Wer bin ich?</h2>
+      <p>Ich bin <strong>ZAA_AY</strong>, leidenschaftlicher Minecraft-Spieler, Technik-Freak und kreativer Serverentwickler. Wenn ich nicht gerade an meinem Projekt arbeite, bin ich auf <code>farmsucht.eu</code> unterwegs oder plane neue Features.</p>
+    </div>
+
+    <div class="card">
+      <h2>Was mache ich?</h2>
+      <p>Ich entwickle Minecraft-Systeme, spiele PvP, baue Community-Projekte und helfe anderen Servern beim Aufbau. Außerdem programmiere ich Webprojekte wie dieses hier.</p>
+    </div>
+
+    <a class="button" href="https://discord.gg/DeinDiscordInvite" target="_blank">Mein Discord</a>
+    <a class="button" href="https://github.com/ZAAAY" target="_blank">Mein GitHub</a>
+  </div>
+
+  <footer>
+    &copy; 2025 ZAA_AY. Alle Rechte vorbehalten.
+  </footer>
+</body>
 </html>
