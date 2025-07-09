@@ -196,8 +196,8 @@
         }
 
         @keyframes glow {
-            from { filter: drop-shadow(0 0 20px var(--primary-color)); }
-            to { filter: drop-shadow(0 0 30px var(--secondary-color)); }
+            from { filter: drop-shadow(0 0 5px var(--primary-color)); }
+            to { filter: drop-shadow(0 0 8px var(--secondary-color)); }
         }
 
         .hero p {
@@ -562,12 +562,11 @@
             <a href="#" class="logo">Farmsucht.eu</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#" onclick="openModal('wikiModal')">Wiki</a></li>
+                <li><a href="https://marcel.farmsucht.eu/wiki" target="_blank">Wiki</a></li>
                 <li><a href="#" onclick="openModal('rulesModal')">Regeln</a></li>
                 <li><a href="https://dsc.gg/farmsucht" target="_blank">Discord</a></li>
                 <li><a href="https://minecraft-server.eu/server/index/23447" target="_blank">Vote</a></li>
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </nav>
     </header>
 
@@ -585,7 +584,7 @@
                     <a href="#" class="btn btn-primary">🎮 Jetzt Spielen</a>
                     <a href="https://dsc.gg/farmsucht" target="_blank" class="btn btn-discord">💬 Discord</a>
                     <a href="https://minecraft-server.eu/server/index/23447" target="_blank" class="btn btn-vote">⭐ Vote für uns</a>
-                    <a href="#" onclick="openModal('wikiModal')" class="btn btn-secondary">📚 Wiki</a>
+                    <a href="https://marcel.farmsucht.eu/wiki" target="_blank" class="btn btn-secondary">📚 Wiki</a>
                 </div>
             </div>
         </section>
@@ -789,20 +788,6 @@
 
     <script>
         // Theme Toggle
-        // Theme Toggle
-        function toggleTheme() {
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
-            
-            if (body.dataset.theme === 'light') {
-                body.dataset.theme = 'dark';
-                themeToggle.textContent = '🌙';
-            } else {
-                body.dataset.theme = 'light';
-                themeToggle.textContent = '☀️';
-            }
-        }
-
         // Modal Functions
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'block';
@@ -822,15 +807,8 @@
             });
         }
 
-        // Initialize theme on page load (default: dark)
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
-            
-            // Set default theme to dark
-            body.dataset.theme = 'dark';
-            themeToggle.textContent = '🌙';
-            
             // Add fade-in animation to elements
             const elements = document.querySelectorAll('.feature-card, .hero-content');
             elements.forEach((el, index) => {
