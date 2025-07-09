@@ -3,81 +3,332 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zaa_ay | Offizielle Seite</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&display=swap" rel="stylesheet">
+  <title>zaa_ay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #0e0e0e;
-      color: #ffffff;
-      text-align: center;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      transition: all 0.3s ease;
       overflow-x: hidden;
     }
-    header {
-      background: #111;
-      padding: 2rem 1rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.7);
-      animation: fadeInDown 1s ease-out;
+    
+    body.light {
+      background-color: #fafafa;
+      color: #333;
     }
-    h1 {
-      font-size: 3rem;
+    
+    body.dark {
+      background-color: #0f0f0f;
+      color: #e2e8f0;
+    }
+    
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      animation: slideInFromTop 0.8s ease-out;
+    }
+    
+    .light .theme-toggle {
+      background-color: #ffffff;
+      color: #333;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark .theme-toggle {
+      background-color: #1a1a1a;
+      color: #e2e8f0;
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    }
+    
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(180deg);
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      text-align: center;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .header {
+      margin-bottom: 3rem;
+      animation: slideInFromLeft 0.8s ease-out;
+    }
+    
+    .title {
+      font-size: 2.5rem;
+      font-weight: 600;
       margin-bottom: 0.5rem;
-      color: #00ffcc;
-      animation: glow 2s ease-in-out infinite alternate;
+      opacity: 0;
+      animation: fadeInScale 1s ease-out 0.3s forwards;
     }
-    p {
-      font-size: 1.2rem;
-      color: #ccc;
+    
+    .light .title {
+      color: #2d3748;
     }
-    .content {
-      padding: 3rem 1rem;
+    
+    .dark .title {
+      color: #f7fafc;
     }
+    
+    .subtitle {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0;
+      animation: fadeInScale 1s ease-out 0.5s forwards;
+    }
+    
+    .light .subtitle {
+      color: #718096;
+    }
+    
+    .dark .subtitle {
+      color: #a0aec0;
+    }
+    
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
     .card {
-      background: #1a1a1a;
-      margin: 1.5rem auto;
-      max-width: 600px;
-      padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
-      animation: fadeInUp 1s ease-out;
+      padding: 2rem;
+      border: 1px solid;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: cardSlideIn 0.8s ease-out forwards;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .card:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    
+    .card:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .card:hover::before {
+      left: 100%;
+    }
+    
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
     }
+    
+    .light .card {
+      background: white;
+      border-color: #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .light .card:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .dark .card {
+      background: #1a1a1a;
+      border-color: #2d3748;
+      box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+    }
+    
+    .dark .card:hover {
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+    }
+    
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .light .card-title {
+      color: #2d3748;
+    }
+    
+    .dark .card-title {
+      color: #f7fafc;
+    }
+    
+    .card-text {
+      font-size: 0.95rem;
+    }
+    
+    .light .card-text {
+      color: #718096;
+    }
+    
+    .dark .card-text {
+      color: #a0aec0;
+    }
+    
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      animation: slideInFromRight 0.8s ease-out;
+    }
+    
     .button {
-      display: inline-block;
-      padding: 1rem 2rem;
-      margin: 1rem;
-      background-color: #00ffcc;
-      color: black;
-      font-weight: bold;
-      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
       text-decoration: none;
-      transition: background 0.3s, transform 0.3s;
-      animation: fadeIn 1s ease-out;
-    }
-    .button:hover {
-      background-color: #00e6b3;
-      transform: scale(1.05);
-    }
-    footer {
-      background: #111;
-      padding: 1rem;
+      font-weight: 500;
       font-size: 0.9rem;
-      color: #888;
-      animation: fadeInUp 1s ease-out;
+      min-width: 200px;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: buttonSlideIn 0.6s ease-out forwards;
     }
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc;
-      }
-      to {
-        text-shadow: 0 0 15px #00e6b3, 0 0 20px #00e6b3, 0 0 25px #00e6b3;
-      }
+    
+    .button:nth-child(1) {
+      animation-delay: 0.6s;
     }
+    
+    .button:nth-child(2) {
+      animation-delay: 0.8s;
+    }
+    
+    .button:nth-child(3) {
+      animation-delay: 1s;
+    }
+    
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .button:hover::before {
+      left: 100%;
+    }
+    
+    .button:hover {
+      transform: translateY(-2px);
+    }
+    
+    .button:active {
+      transform: translateY(0);
+    }
+    
+    .button-primary {
+      background-color: #4299e1;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .button-primary:hover {
+      background-color: #3182ce;
+      box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+    }
+    
+    .button-secondary {
+      transition: all 0.3s ease;
+    }
+    
+    .light .button-secondary {
+      background-color: #e2e8f0;
+      color: #4a5568;
+    }
+    
+    .light .button-secondary:hover {
+      background-color: #cbd5e0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark .button-secondary {
+      background-color: #2d3748;
+      color: #e2e8f0;
+    }
+    
+    .dark .button-secondary:hover {
+      background-color: #4a5568;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    }
+    
+    .copy-feedback {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #48bb78;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    
+    .copy-feedback.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    .footer {
+      margin-top: 3rem;
+      padding: 2rem 0;
+      font-size: 0.9rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 1.2s forwards;
+    }
+    
+    .light .footer {
+      color: #a0aec0;
+    }
+    
+    .dark .footer {
+      color: #718096;
+    }
+    
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -88,7 +339,8 @@
         transform: translateY(0);
       }
     }
-    @keyframes fadeInDown {
+    
+    @keyframes slideInFromTop {
       from {
         opacity: 0;
         transform: translateY(-30px);
@@ -98,6 +350,62 @@
         transform: translateY(0);
       }
     }
+    
+    @keyframes slideInFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes slideInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes cardSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes buttonSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -106,28 +414,116 @@
         opacity: 1;
       }
     }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 3rem 1rem;
+      }
+      
+      .title {
+        font-size: 2rem;
+      }
+      
+      .cards {
+        gap: 1rem;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
+      
+      .theme-toggle {
+        top: 15px;
+        right: 15px;
+      }
+    }
   </style>
 </head>
-<body>
-  <header>
-    <h1>ZAA_AY</h1>
-    <p>Discord zaa_ay</p>
-  </header>
-  <div class="content">
-    <div class="card">
-      <h2>Über mich</h2>
-      <p>Entwickle Server-Features und spiele gerne PvP. Immer auf der Suche nach neuen Herausforderungen.</p>
+<body class="light">
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">🌙</span>
+  </button>
+  
+  <div class="container">
+    <div class="header">
+      <h1 class="title">zaa_ay</h1>
+      <p class="subtitle">Minecraft Developer</p>
     </div>
-    <div class="card">
-      <h2>Farmsucht.eu</h2>
-      <p>Deutscher Minecraft-Server mit einzigartigen Features. Citybuild, PvP, Events und eine aktive Community warten auf dich.</p>
-      <a class="button" href="https://farmsucht.eu" target="_blank">Jetzt spielen</a>
+    
+    <div class="cards">
+      <div class="card">
+        <h2 class="card-title">Farmsucht</h2>
+        <p class="card-text">Deutscher Minecraft-Server</p>
+      </div>
+      
+      <div class="card">
+        <h2 class="card-title">Developer</h2>
+        <p class="card-text">Server-Features & PvP</p>
+      </div>
     </div>
-    <a class="button" href="https://discord.gg/DeinDiscordInvite" target="_blank">Discord</a>
-    <a class="button" href="https://github.com/MarcelJMdev" target="_blank">GitHub</a>
+    
+    <div class="buttons">
+      <button class="button button-primary" onclick="copyServerIP()">
+        Server IP kopieren
+      </button>
+      <a href="https://dsc.gg/farmsucht" target="_blank" class="button button-secondary">
+        Discord
+      </a>
+      <a href="https://minecraft-server.eu/server/index/23447" target="_blank" class="button button-secondary">
+        Server Liste
+      </a>
+    </div>
+    
+    <div class="footer">
+      © 2022 farmsucht
+    </div>
   </div>
-  <footer>
-    &copy; 2022 farmsucht
-  </footer>
+  
+  <div class="copy-feedback" id="copyFeedback">
+    IP kopiert!
+  </div>
+  
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const themeIcon = document.getElementById('theme-icon');
+      
+      if (body.classList.contains('light')) {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        themeIcon.textContent = '☀️';
+      } else {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        themeIcon.textContent = '🌙';
+      }
+    }
+    
+    function copyServerIP() {
+      const serverIP = 'farmsucht.eu';
+      
+      navigator.clipboard.writeText(serverIP).then(() => {
+        showCopyFeedback();
+      }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = serverIP;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showCopyFeedback();
+      });
+    }
+    
+    function showCopyFeedback() {
+      const feedback = document.getElementById('copyFeedback');
+      feedback.classList.add('show');
+      
+      setTimeout(() => {
+        feedback.classList.remove('show');
+      }, 2000);
+    }
+  </script>
 </body>
 </html>
