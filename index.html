@@ -21,15 +21,35 @@
             --text-secondary: #b0b0b0;
             --border-color: #333;
             --hover-color: #2a2a2a;
-            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glass-bg: rgba(26, 26, 26, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
         }
 
         .container {
@@ -38,21 +58,50 @@
             padding: 0 20px;
         }
 
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(46, 204, 113, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(52, 152, 219, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(231, 76, 60, 0.02) 0%, transparent 50%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
         /* Header */
         header {
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         header.scrolled {
-            background: rgba(26, 26, 26, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         nav {
@@ -64,17 +113,28 @@
 
         .logo {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 800;
             color: var(--primary-color);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo::before {
             content: "🌱";
             font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .nav-links {
@@ -88,188 +148,14 @@
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-            background: var(--hover-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(46, 204, 113, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            position: relative;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(46, 204, 113, 0.3);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .server-info {
-            background: rgba(26, 26, 26, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 20px 40px var(--shadow-color);
-        }
-
-        .server-address {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
-        }
-
-        .version-badge {
-            background: linear-gradient(45deg, var(--accent-color), #ff6b6b);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-weight: bold;
-            display: inline-block;
-            margin: 0.5rem;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color), #27ae60);
-            color: white;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(45deg, var(--secondary-color), #2980b9);
-            color: white;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .btn-discord {
-            background: linear-gradient(45deg, #7289da, #5865f2);
-            color: white;
-            box-shadow: 0 4px 15px rgba(114, 137, 218, 0.3);
-        }
-
-        .btn-vote {
-            background: linear-gradient(45deg, #f39c12, #e67e22);
-            color: white;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 0;
-            background: var(--surface-color);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, var(--bg-color) 0%, rgba(26, 26, 26, 0.8) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
+        .nav-links a::before {
             content: '';
             position: absolute;
             top: 0;
@@ -280,27 +166,285 @@
             transition: left 0.5s;
         }
 
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: var(--hover-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 40px rgba(46, 204, 113, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .server-info {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px var(--shadow-color);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .server-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(46, 204, 113, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .server-info > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .server-address {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .version-badge {
+            background: linear-gradient(45deg, var(--accent-color), #ff6b6b);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 0.5rem;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), #27ae60);
+            color: white;
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--secondary-color), #2980b9);
+            color: white;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-discord {
+            background: linear-gradient(45deg, #7289da, #5865f2);
+            color: white;
+            box-shadow: 0 8px 25px rgba(114, 137, 218, 0.4);
+        }
+
+        .btn-vote {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 0;
+            background: var(--surface-color);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            margin-bottom: 4rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(46, 204, 113, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
         .feature-card:hover::before {
             left: 100%;
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow-color);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px var(--shadow-color);
             border-color: var(--primary-color);
         }
 
         .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .feature-card p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
         /* Modal */
@@ -311,22 +455,46 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 2000;
             backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
             background: var(--surface-color);
             margin: 2% auto;
-            padding: 2rem;
-            border-radius: 15px;
+            padding: 3rem;
+            border-radius: 20px;
             max-width: 900px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .close {
@@ -337,41 +505,43 @@
             cursor: pointer;
             color: var(--text-secondary);
             transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            background: var(--hover-color);
         }
 
         .close:hover {
             color: var(--accent-color);
-            background: var(--hover-color);
+            background: var(--glass-bg);
+            transform: scale(1.1);
         }
 
         .modal h2 {
             color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .modal h3 {
             color: var(--secondary-color);
             margin: 2rem 0 1rem 0;
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .modal p, .modal li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             line-height: 1.8;
             color: var(--text-secondary);
         }
 
         .modal ul {
-            margin-left: 1.5rem;
+            margin-left: 2rem;
             margin-bottom: 1.5rem;
         }
 
@@ -381,47 +551,48 @@
 
         .points-system {
             background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
             margin: 1.5rem 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .points-system h4 {
             color: var(--primary-color);
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .important-note {
             margin-top: 2rem;
-            padding: 1.5rem;
+            padding: 2rem;
             background: var(--bg-color);
-            border-radius: 10px;
+            border-radius: 15px;
             border-left: 4px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
         footer {
             background: var(--surface-color);
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 0;
+            border-top: 1px solid var(--glass-border);
+            padding: 4rem 0;
             text-align: center;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 3rem;
             margin-bottom: 2rem;
         }
 
         .footer-section h3 {
             color: var(--primary-color);
             margin-bottom: 1rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .footer-section p, .footer-section a {
@@ -438,26 +609,27 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 2rem;
         }
 
         .social-links a {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
         .social-links a:hover {
             background: var(--primary-color);
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.2) rotate(5deg);
         }
 
         /* Mobile Menu */
@@ -475,18 +647,31 @@
 
         .mobile-menu-toggle:hover {
             background: var(--hover-color);
+            transform: scale(1.1);
         }
 
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 70px;
+            top: 80px;
             left: 0;
             right: 0;
-            background: rgba(26, 26, 26, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
             z-index: 999;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .mobile-menu.active {
@@ -506,8 +691,8 @@
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
             display: block;
             transition: all 0.3s ease;
         }
@@ -515,6 +700,7 @@
         .mobile-menu a:hover {
             color: var(--primary-color);
             background: var(--hover-color);
+            transform: translateX(10px);
         }
 
         /* Responsive */
@@ -527,14 +713,15 @@
                 display: block;
             }
             
-            .hero h1 {
-                font-size: 2.5rem;
+            .features-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .hero p {
-                font-size: 1.2rem;
+
+            .modal-content {
+                margin: 5% auto;
+                padding: 2rem;
             }
-            
+
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -544,38 +731,13 @@
                 width: 100%;
                 max-width: 300px;
             }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                margin: 5% auto;
-                padding: 1.5rem;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="bg-animation"></div>
+    
+    <header id="header">
         <nav class="container">
             <a href="#" class="logo">Farmsucht.eu</a>
             <ul class="nav-links">
@@ -622,28 +784,28 @@
                 <h2 class="section-title">Warum Farmsucht.eu?</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <h3>CityBuild</h3>
-                        <p>Baue deine eigene Stadt, handle mit anderen Spielern und erschaffe dein Imperium in einer professionellen Umgebung!</p>
+                        <h3>🏗️ CityBuild</h3>
+                        <p>Baue deine eigene Stadt, handle mit anderen Spielern und erschaffe dein Imperium in einer professionellen Umgebung mit unbegrenzten Möglichkeiten!</p>
                     </div>
                     <div class="feature-card">
-                        <h3>PvP Action</h3>
-                        <p>Intensive PvP-Kämpfe mit fairem Gameplay, ausgeglichenen Systemen und spannenden Turnieren für alle Skill-Level!</p>
+                        <h3>⚔️ PvP Action</h3>
+                        <p>Intensive PvP-Kämpfe mit fairem Gameplay, ausgeglichenen Systemen und spannenden Turnieren für alle Skill-Level - teste deine Fähigkeiten!</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Punktesystem</h3>
-                        <p>Sammle Punkte durch verschiedene Aktivitäten und steige in den Rängen auf - ein durchdachtes Belohnungssystem!</p>
+                        <h3>🎯 Punktesystem</h3>
+                        <p>Sammle Punkte durch verschiedene Aktivitäten und steige in den Rängen auf - ein durchdachtes Belohnungssystem motiviert dich täglich!</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Community</h3>
-                        <p>Aktive und freundliche Community seit 2022 mit regelmäßigen Events und professionellem Support-Team!</p>
+                        <h3>👥 Community</h3>
+                        <p>Aktive und freundliche Community seit 2022 mit regelmäßigen Events und professionellem Support-Team - du bist nie allein!</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Ständige Updates</h3>
-                        <p>Immer auf dem neuesten Stand mit Version 1.21.4 und kontinuierlichen Verbesserungen für optimale Performance!</p>
+                        <h3>🔄 Ständige Updates</h3>
+                        <p>Immer auf dem neuesten Stand mit Version 1.21.4 und kontinuierlichen Verbesserungen für optimale Performance und neue Features!</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Belohnungen</h3>
-                        <p>Tägliche Belohnungen, Voting-Rewards und spezielle Events mit wertvollen Preisen für aktive Spieler!</p>
+                        <h3>🎁 Belohnungen</h3>
+                        <p>Tägliche Belohnungen, Voting-Rewards und spezielle Events mit wertvollen Preisen für aktive Spieler - deine Aktivität wird belohnt!</p>
                     </div>
                 </div>
             </div>
@@ -654,22 +816,22 @@
     <div id="wikiModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('wikiModal')">&times;</span>
-            <h2>Farmsucht.eu Wiki</h2>
+            <h2>📚 Farmsucht.eu Wiki</h2>
             
-            <h3>Punktesystem</h3>
+            <h3>🎯 Punktesystem</h3>
             <div class="points-system">
                 <h4>Punkte verdienen:</h4>
                 <ul>
-                    <li>Spielzeit: 1 Punkt pro 30 Minuten Online-Zeit</li>
-                    <li>Voting: 5 Punkte pro Vote</li>
-                    <li>PvP-Kills: 3 Punkte pro Kill</li>
-                    <li>Bauen: 2 Punkte pro Block (bestimmte Materialien)</li>
-                    <li>Events: 10-50 Punkte je nach Event</li>
-                    <li>Quests: 5-20 Punkte pro Quest</li>
+                    <li><strong>Spielzeit:</strong> 1 Punkt pro 30 Minuten Online-Zeit</li>
+                    <li><strong>Voting:</strong> 5 Punkte pro Vote</li>
+                    <li><strong>PvP-Kills:</strong> 3 Punkte pro Kill</li>
+                    <li><strong>Bauen:</strong> 2 Punkte pro Block (bestimmte Materialien)</li>
+                    <li><strong>Events:</strong> 10-50 Punkte je nach Event</li>
+                    <li><strong>Quests:</strong> 5-20 Punkte pro Quest</li>
                 </ul>
             </div>
 
-            <h3>Shop System</h3>
+            <h3>🛒 Shop System</h3>
             <p>Mit deinen Punkten kannst du im Shop verschiedene Items kaufen:</p>
             <ul>
                 <li>Baumateriellen und Werkzeuge</li>
@@ -679,7 +841,7 @@
                 <li>Spezial-Permissions</li>
             </ul>
 
-            <h3>CityBuild Guide</h3>
+            <h3>🏗️ CityBuild Guide</h3>
             <p>So startest du dein CityBuild-Abenteuer:</p>
             <ul>
                 <li>Verwende <strong>/plot auto</strong> um ein freies Grundstück zu bekommen</li>
@@ -689,26 +851,30 @@
                 <li>Verkaufe oder vermiete Plots mit <strong>/plot sell</strong></li>
             </ul>
 
-            <h3>PvP Tipps</h3>
+            <h3>⚔️ PvP Tipps</h3>
             <p>Werde zum PvP-Champion:</p>
-            <ul>
-                <li>Trainiere in der PvP-Arena (<strong>/warp pvp</strong>)</li>
-                <li>Nutze die besten Enchantments für deine Ausrüstung</li>
-                <li>Lerne verschiedene Kampftechniken</li>
-                <li>Nimm an PvP-Turnieren teil</li>
-                <li>Sammle Kills für den Leaderboard</li>
+            <li>Nutze die <strong>/warp pvp</strong> Arena für faire Kämpfe</li>
+                <li>Sammle bessere Ausrüstung durch Siege</li>
+                <li>Trainiere deine Combo-Skills täglich</li>
+                <li>Lerne die Map-Layouts kennen</li>
+                <li>Nutze strategische Positionen</li>
             </ul>
 
-            <h3>Wichtige Befehle</h3>
+            <h3>📋 Wichtige Befehle</h3>
             <ul>
                 <li><strong>/spawn</strong> - Zurück zum Spawn</li>
-                <li><strong>/sethome [Name]</strong> - Setze einen Home-Punkt</li>
-                <li><strong>/home [Name]</strong> - Teleportiere zu deinem Home</li>
-                <li><strong>/points</strong> - Zeige deine Punkte an</li>
-                <li><strong>/shop</strong> - Öffne den Server-Shop</li>
-                <li><strong>/warp [Name]</strong> - Teleportiere zu Warps</li>
-                <li><strong>/vote</strong> - Links zum Voten</li>
+                <li><strong>/tpa [Spieler]</strong> - Teleportanfrage senden</li>
+                <li><strong>/home</strong> - Zu deinem Zuhause</li>
+                <li><strong>/balance</strong> - Dein Guthaben anzeigen</li>
+                <li><strong>/shop</strong> - Den Server-Shop öffnen</li>
+                <li><strong>/points</strong> - Deine Punkte anzeigen</li>
+                <li><strong>/vote</strong> - Voting-Links anzeigen</li>
+                <li><strong>/discord</strong> - Discord-Link erhalten</li>
             </ul>
+
+            <div class="important-note">
+                <strong>💡 Tipp:</strong> Nutze <strong>/help</strong> für eine vollständige Befehlsliste oder frage im Discord nach Hilfe!
+            </div>
         </div>
     </div>
 
@@ -716,64 +882,44 @@
     <div id="rulesModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('rulesModal')">&times;</span>
-            <h2>Server Regeln</h2>
+            <h2>📋 Server Regeln</h2>
             
-            <h3>Allgemeine Regeln</h3>
+            <h3>🚫 Grundregeln</h3>
             <ul>
-                <li>Respektiere alle Spieler und Teammitglieder</li>
-                <li>Kein Spam, Flooding oder Werbung im Chat</li>
-                <li>Keine Beleidigungen, Diskriminierung oder Mobbing</li>
-                <li>Deutsch oder Englisch im öffentlichen Chat</li>
-                <li>Keine Politik oder kontroverse Themen</li>
-                <li>Befolge die Anweisungen der Teammitglieder</li>
+                <li><strong>Respekt:</strong> Behandle alle Spieler mit Respekt</li>
+                <li><strong>Keine Beleidigungen:</strong> Kein Spam, Flame oder toxisches Verhalten</li>
+                <li><strong>Deutsch/Englisch:</strong> Nur diese Sprachen im Chat</li>
+                <li><strong>Kein Griefing:</strong> Zerstöre keine Builds anderer Spieler</li>
+                <li><strong>Keine Werbung:</strong> Keine Werbung für andere Server</li>
             </ul>
 
-            <h3>PvP Regeln</h3>
+            <h3>⚔️ PvP Regeln</h3>
             <ul>
-                <li>Kein Camping am Spawn</li>
-                <li>Keine Hacks, Cheats oder unfaire Mods</li>
-                <li>Respektiere andere Spieler auch im PvP</li>
-                <li>Kein Teaming in FFA-Bereichen</li>
-                <li>Keine Ausnutzung von Bugs oder Glitches</li>
+                <li>Nur in PvP-Zonen kämpfen</li>
+                <li>Kein Teaming in 1vs1 Kämpfen</li>
+                <li>Keine unfairen Vorteile nutzen</li>
+                <li>Respektiere andere Kämpfer</li>
             </ul>
 
-            <h3>CityBuild Regeln</h3>
+            <h3>🏗️ CityBuild Regeln</h3>
             <ul>
-                <li>Baue nur auf deinem eigenen Grundstück</li>
-                <li>Keine anstößigen oder beleidigenden Builds</li>
-                <li>Respektiere die Builds anderer Spieler</li>
-                <li>Kein Griefing oder Zerstören fremder Builds</li>
-                <li>Halte dein Grundstück sauber und ordentlich</li>
+                <li>Baue nur auf deinen eigenen Plots</li>
+                <li>Keine unangemessenen Builds</li>
+                <li>Halte deine Plots sauber</li>
+                <li>Respektiere Nachbar-Builds</li>
             </ul>
 
-            <h3>Handel & Wirtschaft</h3>
+            <h3>⚠️ Strafen</h3>
             <ul>
-                <li>Kein Scamming oder Betrug beim Handel</li>
-                <li>Halte deine Handelsversprechen ein</li>
-                <li>Keine Manipulation der Serverökonomie</li>
-                <li>Faire Preise im Player-Shop</li>
-            </ul>
-
-            <h3>Technische Regeln</h3>
-            <ul>
-                <li>Keine Lag-Maschinen oder Performance-Killer</li>
-                <li>Begrenzte Redstone-Konstruktionen</li>
-                <li>Keine Duplication-Bugs ausnutzen</li>
-                <li>Melde Bugs im Discord oder an ein Teammitglied</li>
-            </ul>
-
-            <h3>Strafen</h3>
-            <p>Bei Regelverstößen können folgende Strafen verhängt werden:</p>
-            <ul>
-                <li><strong>Verwarnung:</strong> Erste Ermahnung</li>
-                <li><strong>Mute:</strong> Temporärer Chat-Ausschluss</li>
-                <li><strong>Kick:</strong> Temporärer Server-Ausschluss</li>
-                <li><strong>Tempban:</strong> Zeitlich begrenzter Bann</li>
-                <li><strong>Permaban:</strong> Permanenter Ausschluss</li>
+                <li><strong>Verwarnung:</strong> Bei kleineren Verstößen</li>
+                <li><strong>Mute:</strong> Bei Chat-Verstößen</li>
+                <li><strong>Kick:</strong> Bei wiederholten Verstößen</li>
+                <li><strong>Tempban:</strong> Bei schweren Verstößen</li>
+                <li><strong>Permaban:</strong> Bei extremen Verstößen</li>
             </ul>
 
             <div class="important-note">
-                <strong>Wichtig:</strong> Unwissenheit schützt nicht vor Strafe. Alle Spieler sind verpflichtet, sich über die aktuellen Regeln zu informieren. Bei Fragen wende dich an unser Team!
+                <strong>⚖️ Wichtig:</strong> Unwissen schützt nicht vor Strafen! Lies die Regeln aufmerksam durch.
             </div>
         </div>
     </div>
@@ -783,18 +929,140 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Farmsucht.eu</h3>
-                    <p>Der beste Minecraft CityBuild & PvP Server seit 2022</p>
-                    <div class="social-links">
-                        <a href="https://dsc.gg/farmsucht" target="_blank">💬</a>
-                        <a href="https://minecraft-server.eu/server/index/23447" target="_blank">⭐</a>
-                    </div>
+                    <p>Der ultimative Minecraft CityBuild & PvP Server seit 2022</p>
+                    <p>Erlebe das beste Gaming-Erlebnis mit unserer Community!</p>
                 </div>
                 <div class="footer-section">
-                    <h3>Server Info</h3>
-                    <p>IP: farmsucht.eu</p>
-                    <p>Version: 1.21.4</p>
-                    <p>Online seit: 2022</p>
+                    <h3>Quick Links</h3>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#" onclick="openModal('wikiModal')">Wiki</a></p>
+                    <p><a href="#" onclick="openModal('rulesModal')">Regeln</a></p>
                 </div>
                 <div class="footer-section">
-                    <h3>Links</h3>
-                    <p><a href="https://dsc.gg/farm
+                    <h3>Community</h3>
+                    <p><a href="https://dsc.gg/farmsucht" target="_blank">Discord Server</a></p>
+                    <p><a href="https://minecraft-server.eu/server/index/23447" target="_blank">Vote für uns</a></p>
+                    <p>Server IP: farmsucht.eu</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://dsc.gg/farmsucht" target="_blank">💬</a>
+                <a href="https://minecraft-server.eu/server/index/23447" target="_blank">⭐</a>
+            </div>
+            <p style="margin-top: 2rem; color: var(--text-secondary); text-align: center;">
+                © 2024 Farmsucht.eu - Alle Rechte vorbehalten
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy server address to clipboard
+        document.querySelector('.server-address').addEventListener('click', function() {
+            navigator.clipboard.writeText('farmsucht.eu').then(() => {
+                const originalText = this.textContent;
+                this.textContent = 'IP kopiert! ✓';
+                this.style.color = '#2ecc71';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.color = '';
+                }, 2000);
+            });
+        });
+
+        // Add floating particles effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.backgroundColor = '#2ecc71';
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '-1';
+            particle.style.opacity = '0.3';
+            document.body.appendChild(particle);
+
+            const animation = particle.animate([
+                { transform: 'translateY(0px)', opacity: 0.3 },
+                { transform: 'translateY(-' + window.innerHeight + 'px)', opacity: 0 }
+            ], {
+                duration: 15000,
+                easing: 'linear'
+            });
+
+            animation.onfinish = () => {
+                particle.remove();
+            };
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 3000);
+    </script>
+</body>
+</html>
