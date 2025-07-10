@@ -15,26 +15,24 @@
             --primary-color: #2ecc71;
             --secondary-color: #3498db;
             --accent-color: #e74c3c;
-            --bg-color: #0a0a0a;
+            --bg-color: #0f0f0f;
             --surface-color: #1a1a1a;
             --text-color: #ffffff;
             --text-secondary: #b0b0b0;
             --border-color: #333;
             --hover-color: #2a2a2a;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --glass-bg: rgba(26, 26, 26, 0.8);
+            --glass-bg: rgba(26, 26, 26, 0.85);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -44,12 +42,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            background: #27ae60;
         }
 
         .container {
@@ -58,50 +56,20 @@
             padding: 0 20px;
         }
 
-        /* Animated background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(46, 204, 113, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(52, 152, 219, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(231, 76, 60, 0.02) 0%, transparent 50%);
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
-
         /* Header */
         header {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.3s ease;
         }
 
         header.scrolled {
             background: rgba(10, 10, 10, 0.95);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         nav {
@@ -113,28 +81,14 @@
 
         .logo {
             font-size: 1.8rem;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo::before {
-            content: "🌱";
-            font-size: 2rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            color: #27ae60;
         }
 
         .nav-links {
@@ -148,32 +102,14 @@
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0.8rem 1.2rem;
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(46, 204, 113, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-links a:hover::before {
-            left: 100%;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
         }
 
         .nav-links a:hover {
             color: var(--primary-color);
             background: var(--hover-color);
-            transform: translateY(-2px);
         }
 
         /* Hero Section */
@@ -183,7 +119,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.05) 0%, rgba(52, 152, 219, 0.05) 100%);
         }
 
         .hero-content {
@@ -191,36 +127,16 @@
             z-index: 2;
             position: relative;
             padding: 2rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero h1 {
             font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 900;
+            font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
-            background-size: 200% 200%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 3s ease infinite;
-            text-shadow: 0 0 40px rgba(46, 204, 113, 0.3);
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
 
         .hero p {
@@ -230,67 +146,40 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
         .server-info {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 2.5rem;
             margin: 2rem 0;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 25px 50px var(--shadow-color);
-            animation: fadeInUp 1s ease-out 0.6s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .server-info::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(46, 204, 113, 0.1), transparent);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            to { transform: rotate(360deg); }
-        }
-
-        .server-info > * {
-            position: relative;
-            z-index: 1;
+            backdrop-filter: blur(10px);
         }
 
         .server-address {
             font-size: 2.5rem;
-            font-weight: 900;
+            font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            font-family: 'Monaco', 'Menlo', monospace;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .server-address:hover {
+            color: #27ae60;
         }
 
         .version-badge {
-            background: linear-gradient(45deg, var(--accent-color), #ff6b6b);
+            background: linear-gradient(45deg, var(--accent-color), #c0392b);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
             display: inline-block;
             margin: 0.5rem;
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .cta-buttons {
@@ -299,152 +188,95 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 2rem;
-            animation: fadeInUp 1s ease-out 0.9s both;
         }
 
         .btn {
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            justify-content: center;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color), #27ae60);
+            background: var(--primary-color);
             color: white;
-            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
         }
 
         .btn-secondary {
-            background: linear-gradient(45deg, var(--secondary-color), #2980b9);
+            background: var(--secondary-color);
             color: white;
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
         }
 
         .btn-discord {
-            background: linear-gradient(45deg, #7289da, #5865f2);
+            background: #5865f2;
             color: white;
-            box-shadow: 0 8px 25px rgba(114, 137, 218, 0.4);
         }
 
         .btn-vote {
-            background: linear-gradient(45deg, #f39c12, #e67e22);
+            background: #f39c12;
             color: white;
-            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.4);
         }
 
         .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
         /* Features Section */
         .features {
-            padding: 8rem 0;
+            padding: 6rem 0;
             background: var(--surface-color);
-            position: relative;
         }
 
         .section-title {
             text-align: center;
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
-            margin-bottom: 4rem;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 3rem;
             color: var(--primary-color);
-            font-weight: 800;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
+            font-weight: 700;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            margin-top: 4rem;
+            margin-top: 3rem;
         }
 
         .feature-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2.5rem;
+            border-radius: 16px;
+            padding: 2rem;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(46, 204, 113, 0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .feature-card:hover::before {
-            left: 100%;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .feature-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px var(--shadow-color);
+            transform: translateY(-5px);
             border-color: var(--primary-color);
         }
 
         .feature-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--primary-color);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
         /* Modal */
@@ -457,8 +289,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             z-index: 2000;
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease-out;
+            backdrop-filter: blur(5px);
         }
 
         .modal.active {
@@ -467,46 +298,28 @@
             justify-content: center;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         .modal-content {
             background: var(--surface-color);
             margin: 2% auto;
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 900px;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 800px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-            animation: scaleIn 0.3s ease-out;
-        }
-
-        @keyframes scaleIn {
-            from { 
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to { 
-                opacity: 1;
-                transform: scale(1);
-            }
         }
 
         .close {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-secondary);
-            transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
+            transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -516,33 +329,31 @@
 
         .close:hover {
             color: var(--accent-color);
-            background: var(--glass-bg);
-            transform: scale(1.1);
         }
 
         .modal h2 {
             color: var(--primary-color);
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            font-weight: 800;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
         }
 
         .modal h3 {
             color: var(--secondary-color);
-            margin: 2rem 0 1rem 0;
-            font-size: 1.5rem;
-            font-weight: 700;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .modal p, .modal li {
-            margin-bottom: 1rem;
-            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
             color: var(--text-secondary);
         }
 
         .modal ul {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .modal strong {
@@ -551,48 +362,46 @@
 
         .points-system {
             background: var(--bg-color);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
         }
 
         .points-system h4 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
         .important-note {
-            margin-top: 2rem;
-            padding: 2rem;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
             background: var(--bg-color);
-            border-radius: 15px;
+            border-radius: 12px;
             border-left: 4px solid var(--primary-color);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
         footer {
             background: var(--surface-color);
             border-top: 1px solid var(--glass-border);
-            padding: 4rem 0;
+            padding: 3rem 0;
             text-align: center;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            gap: 2rem;
             margin-bottom: 2rem;
         }
 
         .footer-section h3 {
             color: var(--primary-color);
             margin-bottom: 1rem;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .footer-section p, .footer-section a {
@@ -615,21 +424,19 @@
         .social-links a {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            border-radius: 12px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
             background: var(--primary-color);
             color: white;
-            transform: scale(1.2) rotate(5deg);
+            transform: scale(1.05);
         }
 
         /* Mobile Menu */
@@ -642,12 +449,11 @@
             cursor: pointer;
             padding: 0.5rem;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .mobile-menu-toggle:hover {
             background: var(--hover-color);
-            transform: scale(1.1);
         }
 
         .mobile-menu {
@@ -657,21 +463,9 @@
             left: 0;
             right: 0;
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
             z-index: 999;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .mobile-menu.active {
@@ -691,8 +485,8 @@
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
             display: block;
             transition: all 0.3s ease;
         }
@@ -700,7 +494,6 @@
         .mobile-menu a:hover {
             color: var(--primary-color);
             background: var(--hover-color);
-            transform: translateX(10px);
         }
 
         /* Responsive */
@@ -729,14 +522,12 @@
             
             .btn {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    
     <header id="header">
         <nav class="container">
             <a href="#" class="logo">Farmsucht.eu</a>
@@ -766,15 +557,15 @@
                 <h1>FARMSUCHT.EU</h1>
                 <p>Der ultimative Minecraft CityBuild & PvP Server seit 2022</p>
                 <div class="server-info">
-                    <div class="server-address">farmsucht.eu</div>
+                    <div class="server-address" title="Klicken zum Kopieren">farmsucht.eu</div>
                     <div class="version-badge">Version 1.21.4</div>
                     <p>Erlebe das beste CityBuild & PvP Erlebnis in Minecraft!</p>
                 </div>
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">🎮 Jetzt Spielen</a>
-                    <a href="https://dsc.gg/farmsucht" target="_blank" class="btn btn-discord">💬 Discord</a>
-                    <a href="https://minecraft-server.eu/server/index/23447" target="_blank" class="btn btn-vote">⭐ Vote für uns</a>
-                    <a href="#" onclick="openModal('wikiModal')" class="btn btn-secondary">📚 Wiki</a>
+                    <a href="#" class="btn btn-primary">Jetzt Spielen</a>
+                    <a href="https://dsc.gg/farmsucht" target="_blank" class="btn btn-discord">Discord</a>
+                    <a href="https://minecraft-server.eu/server/index/23447" target="_blank" class="btn btn-vote">Vote für uns</a>
+                    <a href="#" onclick="openModal('wikiModal')" class="btn btn-secondary">Wiki</a>
                 </div>
             </div>
         </section>
@@ -784,28 +575,28 @@
                 <h2 class="section-title">Warum Farmsucht.eu?</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <h3>🏗️ CityBuild</h3>
-                        <p>Baue deine eigene Stadt, handle mit anderen Spielern und erschaffe dein Imperium in einer professionellen Umgebung mit unbegrenzten Möglichkeiten!</p>
+                        <h3>CityBuild</h3>
+                        <p>Baue deine eigene Stadt, handle mit anderen Spielern und erschaffe dein Imperium in einer professionellen Umgebung mit unbegrenzten Möglichkeiten.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>⚔️ PvP Action</h3>
-                        <p>Intensive PvP-Kämpfe mit fairem Gameplay, ausgeglichenen Systemen und spannenden Turnieren für alle Skill-Level - teste deine Fähigkeiten!</p>
+                        <h3>PvP Action</h3>
+                        <p>Intensive PvP-Kämpfe mit fairem Gameplay, ausgeglichenen Systemen und spannenden Turnieren für alle Skill-Level.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🎯 Punktesystem</h3>
-                        <p>Sammle Punkte durch verschiedene Aktivitäten und steige in den Rängen auf - ein durchdachtes Belohnungssystem motiviert dich täglich!</p>
+                        <h3>Punktesystem</h3>
+                        <p>Sammle Punkte durch verschiedene Aktivitäten und steige in den Rängen auf - ein durchdachtes Belohnungssystem motiviert dich täglich.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>👥 Community</h3>
-                        <p>Aktive und freundliche Community seit 2022 mit regelmäßigen Events und professionellem Support-Team - du bist nie allein!</p>
+                        <h3>Community</h3>
+                        <p>Aktive und freundliche Community seit 2022 mit regelmäßigen Events und professionellem Support-Team.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🔄 Ständige Updates</h3>
-                        <p>Immer auf dem neuesten Stand mit Version 1.21.4 und kontinuierlichen Verbesserungen für optimale Performance und neue Features!</p>
+                        <h3>Ständige Updates</h3>
+                        <p>Immer auf dem neuesten Stand mit Version 1.21.4 und kontinuierlichen Verbesserungen für optimale Performance.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🎁 Belohnungen</h3>
-                        <p>Tägliche Belohnungen, Voting-Rewards und spezielle Events mit wertvollen Preisen für aktive Spieler - deine Aktivität wird belohnt!</p>
+                        <h3>Belohnungen</h3>
+                        <p>Tägliche Belohnungen, Voting-Rewards und spezielle Events mit wertvollen Preisen für aktive Spieler.</p>
                     </div>
                 </div>
             </div>
@@ -816,9 +607,9 @@
     <div id="wikiModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('wikiModal')">&times;</span>
-            <h2>📚 Farmsucht.eu Wiki</h2>
+            <h2>Farmsucht.eu Wiki</h2>
             
-            <h3>🎯 Punktesystem</h3>
+            <h3>Punktesystem</h3>
             <div class="points-system">
                 <h4>Punkte verdienen:</h4>
                 <ul>
@@ -831,7 +622,7 @@
                 </ul>
             </div>
 
-            <h3>🛒 Shop System</h3>
+            <h3>Shop System</h3>
             <p>Mit deinen Punkten kannst du im Shop verschiedene Items kaufen:</p>
             <ul>
                 <li>Baumateriellen und Werkzeuge</li>
@@ -841,7 +632,7 @@
                 <li>Spezial-Permissions</li>
             </ul>
 
-            <h3>🏗️ CityBuild Guide</h3>
+            <h3>CityBuild Guide</h3>
             <p>So startest du dein CityBuild-Abenteuer:</p>
             <ul>
                 <li>Verwende <strong>/plot auto</strong> um ein freies Grundstück zu bekommen</li>
@@ -851,16 +642,17 @@
                 <li>Verkaufe oder vermiete Plots mit <strong>/plot sell</strong></li>
             </ul>
 
-            <h3>⚔️ PvP Tipps</h3>
+            <h3>PvP Tipps</h3>
             <p>Werde zum PvP-Champion:</p>
-            <li>Nutze die <strong>/warp pvp</strong> Arena für faire Kämpfe</li>
+            <ul>
+                <li>Nutze die <strong>/warp pvp</strong> Arena für faire Kämpfe</li>
                 <li>Sammle bessere Ausrüstung durch Siege</li>
                 <li>Trainiere deine Combo-Skills täglich</li>
                 <li>Lerne die Map-Layouts kennen</li>
                 <li>Nutze strategische Positionen</li>
             </ul>
 
-            <h3>📋 Wichtige Befehle</h3>
+            <h3>Wichtige Befehle</h3>
             <ul>
                 <li><strong>/spawn</strong> - Zurück zum Spawn</li>
                 <li><strong>/tpa [Spieler]</strong> - Teleportanfrage senden</li>
@@ -873,7 +665,7 @@
             </ul>
 
             <div class="important-note">
-                <strong>💡 Tipp:</strong> Nutze <strong>/help</strong> für eine vollständige Befehlsliste oder frage im Discord nach Hilfe!
+                <strong>Tipp:</strong> Nutze <strong>/help</strong> für eine vollständige Befehlsliste oder frage im Discord nach Hilfe!
             </div>
         </div>
     </div>
@@ -882,9 +674,9 @@
     <div id="rulesModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('rulesModal')">&times;</span>
-            <h2>📋 Server Regeln</h2>
+            <h2>Server Regeln</h2>
             
-            <h3>🚫 Grundregeln</h3>
+            <h3>Grundregeln</h3>
             <ul>
                 <li><strong>Respekt:</strong> Behandle alle Spieler mit Respekt</li>
                 <li><strong>Keine Beleidigungen:</strong> Kein Spam, Flame oder toxisches Verhalten</li>
@@ -893,7 +685,7 @@
                 <li><strong>Keine Werbung:</strong> Keine Werbung für andere Server</li>
             </ul>
 
-            <h3>⚔️ PvP Regeln</h3>
+            <h3>PvP Regeln</h3>
             <ul>
                 <li>Nur in PvP-Zonen kämpfen</li>
                 <li>Kein Teaming in 1vs1 Kämpfen</li>
@@ -901,7 +693,7 @@
                 <li>Respektiere andere Kämpfer</li>
             </ul>
 
-            <h3>🏗️ CityBuild Regeln</h3>
+            <h3>CityBuild Regeln</h3>
             <ul>
                 <li>Baue nur auf deinen eigenen Plots</li>
                 <li>Keine unangemessenen Builds</li>
@@ -909,17 +701,17 @@
                 <li>Respektiere Nachbar-Builds</li>
             </ul>
 
-            <h3>⚠️ Strafen</h3>
+            <h3>Strafen</h3>
             <ul>
                 <li><strong>Verwarnung:</strong> Bei kleineren Verstößen</li>
                 <li><strong>Mute:</strong> Bei Chat-Verstößen</li>
                 <li><strong>Kick:</strong> Bei wiederholten Verstößen</li>
                 <li><strong>Tempban:</strong> Bei schweren Verstößen</li>
-                <li><strong>Permaban:</strong> Bei extremen Verstößen</li>
+                <li><strong>Permban:</strong> Bei extremen Verstößen</li>
             </ul>
 
             <div class="important-note">
-                <strong>⚖️ Wichtig:</strong> Unwissen schützt nicht vor Strafen! Lies die Regeln aufmerksam durch.
+                <strong>Wichtig:</strong> Unwissen schützt nicht vor Strafen! Lies die Regeln aufmerksam durch.
             </div>
         </div>
     </div>
@@ -950,7 +742,7 @@
                 <a href="https://minecraft-server.eu/server/index/23447" target="_blank">⭐</a>
             </div>
             <p style="margin-top: 2rem; color: var(--text-secondary); text-align: center;">
-                © 2024 Farmsucht.eu - Alle Rechte vorbehalten
+                © 2022 farmsucht.eu
             </p>
         </div>
     </footer>
@@ -1024,45 +816,14 @@
         document.querySelector('.server-address').addEventListener('click', function() {
             navigator.clipboard.writeText('farmsucht.eu').then(() => {
                 const originalText = this.textContent;
-                this.textContent = 'IP kopiert! ✓';
-                this.style.color = '#2ecc71';
+                this.textContent = 'IP kopiert!';
+                this.style.color = '#27ae60';
                 setTimeout(() => {
                     this.textContent = originalText;
                     this.style.color = '';
                 }, 2000);
             });
         });
-
-        // Add floating particles effect
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = '4px';
-            particle.style.height = '4px';
-            particle.style.backgroundColor = '#2ecc71';
-            particle.style.borderRadius = '50%';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '-1';
-            particle.style.opacity = '0.3';
-            document.body.appendChild(particle);
-
-            const animation = particle.animate([
-                { transform: 'translateY(0px)', opacity: 0.3 },
-                { transform: 'translateY(-' + window.innerHeight + 'px)', opacity: 0 }
-            ], {
-                duration: 15000,
-                easing: 'linear'
-            });
-
-            animation.onfinish = () => {
-                particle.remove();
-            };
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 3000);
     </script>
 </body>
 </html>
