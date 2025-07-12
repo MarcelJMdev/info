@@ -12,42 +12,24 @@
         }
 
         :root {
-            --primary-color: #2ecc71;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --bg-color: #0f0f0f;
-            --surface-color: #1a1a1a;
-            --text-color: #ffffff;
-            --text-secondary: #b0b0b0;
-            --border-color: #333;
-            --hover-color: #2a2a2a;
-            --glass-bg: rgba(26, 26, 26, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #22c55e;
+            --secondary: #8b5cf6;
+            --accent: #f97316;
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --surface-light: #1a1a1a;
+            --text: #ffffff;
+            --text-light: #a1a1aa;
+            --border: #27272a;
+            --shadow: rgba(0, 0, 0, 0.8);
+            --glow: rgba(34, 197, 94, 0.3);
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #27ae60;
         }
 
         .container {
@@ -58,18 +40,13 @@
 
         /* Header */
         header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            background: var(--surface);
+            box-shadow: 0 2px 20px var(--shadow);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            transition: background 0.3s ease;
-        }
-
-        header.scrolled {
-            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--border);
         }
 
         nav {
@@ -80,15 +57,11 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--primary);
             text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .logo:hover {
-            color: #27ae60;
+            text-shadow: 0 0 10px var(--glow);
         }
 
         .nav-links {
@@ -99,87 +72,85 @@
         }
 
         .nav-links a {
-            color: var(--text-color);
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
-            background: var(--hover-color);
+            color: var(--primary);
+            text-shadow: 0 0 8px var(--glow);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.05) 0%, rgba(52, 152, 219, 0.05) 100%);
-        }
-
-        .hero-content {
+            padding: 140px 0 80px;
             text-align: center;
-            z-index: 2;
-            position: relative;
-            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--glow);
         }
 
         .hero p {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: var(--text-secondary);
+            color: var(--text-light);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .server-info {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2.5rem;
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
             margin: 2rem 0;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid var(--border);
         }
 
         .server-address {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 1rem;
-            font-family: 'Monaco', 'Menlo', monospace;
-            letter-spacing: 2px;
+            font-family: 'Monaco', monospace;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 15px var(--glow);
         }
 
         .server-address:hover {
-            color: #27ae60;
+            color: var(--secondary);
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
         }
 
         .version-badge {
-            background: linear-gradient(45deg, var(--accent-color), #c0392b);
+            background: linear-gradient(45deg, var(--accent), #f59e0b);
             color: white;
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1rem;
             border-radius: 20px;
             font-weight: 600;
             display: inline-block;
-            margin: 0.5rem;
+            margin: 0.5rem 0;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
         }
 
         .cta-buttons {
@@ -191,204 +162,219 @@
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
             transition: all 0.3s ease;
-            min-width: 140px;
-            justify-content: center;
+            min-width: 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: var(--primary-color);
-            color: white;
+            background: linear-gradient(45deg, var(--primary), #16a34a);
+            color: var(--bg);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
         }
 
         .btn-secondary {
-            background: var(--secondary-color);
+            background: linear-gradient(45deg, var(--secondary), #7c3aed);
             color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
         }
 
         .btn-discord {
-            background: #5865f2;
+            background: linear-gradient(45deg, #5865f2, #4752c4);
             color: white;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
         }
 
         .btn-vote {
-            background: #f39c12;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
             color: white;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            opacity: 0.9;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         /* Features Section */
         .features {
-            padding: 6rem 0;
-            background: var(--surface-color);
+            padding: 80px 0;
+            background: var(--surface);
         }
 
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: var(--primary-color);
+            color: var(--primary);
             font-weight: 700;
+            text-shadow: 0 0 15px var(--glow);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
+            background: var(--surface-light);
+            border-radius: 12px;
             padding: 2rem;
             text-align: center;
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary-color);
+            box-shadow: 0 12px 40px var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+            animation: shine 0.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--primary);
             font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
 
         .feature-card p {
-            color: var(--text-secondary);
+            color: var(--text-light);
             line-height: 1.6;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--surface-color);
-            margin: 2% auto;
-            padding: 2.5rem;
-            border-radius: 16px;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
             position: relative;
-            border: 1px solid var(--glass-border);
+            z-index: 1;
         }
 
-        .close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: color 0.3s ease;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--hover-color);
+        /* Support Section */
+        .support {
+            padding: 80px 0;
+            background: var(--bg);
         }
 
-        .close:hover {
-            color: var(--accent-color);
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .modal h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            font-weight: 700;
+        .support-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
 
-        .modal h3 {
-            color: var(--secondary-color);
-            margin: 1.5rem 0 1rem 0;
+        .support-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--secondary);
+        }
+
+        .support-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
             font-size: 1.3rem;
-            font-weight: 600;
         }
 
-        .modal p, .modal li {
-            margin-bottom: 0.8rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-
-        .modal ul {
-            margin-left: 1.5rem;
+        .support-card p {
+            color: var(--text-light);
             margin-bottom: 1rem;
         }
 
-        .modal strong {
-            color: var(--primary-color);
+        /* Team Section */
+        .team {
+            padding: 80px 0;
+            background: var(--surface);
         }
 
-        .points-system {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
+        .team-info {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .points-system h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
+        .team-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .team-info p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
             font-size: 1.1rem;
-            font-weight: 600;
         }
 
-        .important-note {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: var(--bg-color);
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
+        .positions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .position-tag {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: var(--text);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .position-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
         }
 
         /* Footer */
         footer {
-            background: var(--surface-color);
-            border-top: 1px solid var(--glass-border);
+            background: var(--bg);
+            color: var(--text);
             padding: 3rem 0;
             text-align: center;
+            border-top: 1px solid var(--border);
         }
 
         .footer-content {
@@ -399,19 +385,19 @@
         }
 
         .footer-section h3 {
-            color: var(--primary-color);
             margin-bottom: 1rem;
             font-weight: 600;
+            color: var(--primary);
         }
 
         .footer-section p, .footer-section a {
-            color: var(--text-secondary);
+            color: var(--text-light);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer-section a:hover {
-            color: var(--primary-color);
+            color: var(--primary);
         }
 
         .social-links {
@@ -422,11 +408,11 @@
         }
 
         .social-links a {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            width: 50px;
-            height: 50px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -434,38 +420,22 @@
         }
 
         .social-links a:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.05);
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--bg);
         }
 
         /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: background 0.3s ease;
-        }
-
-        .mobile-menu-toggle:hover {
-            background: var(--hover-color);
-        }
-
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 80px;
+            top: 70px;
             left: 0;
             right: 0;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            background: var(--surface);
+            box-shadow: 0 8px 32px var(--shadow);
             z-index: 999;
+            border-bottom: 1px solid var(--border);
         }
 
         .mobile-menu.active {
@@ -482,7 +452,7 @@
         }
 
         .mobile-menu a {
-            color: var(--text-color);
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
             padding: 0.8rem 1rem;
@@ -492,8 +462,8 @@
         }
 
         .mobile-menu a:hover {
-            color: var(--primary-color);
-            background: var(--hover-color);
+            background: var(--surface-light);
+            color: var(--primary);
         }
 
         /* Responsive */
@@ -506,13 +476,12 @@
                 display: block;
             }
             
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
             .features-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                margin: 5% auto;
-                padding: 2rem;
             }
 
             .cta-buttons {
@@ -528,13 +497,14 @@
     </style>
 </head>
 <body>
-    <header id="header">
+    <header>
         <nav class="container">
             <a href="#" class="logo">Farmsucht.eu</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#" onclick="openModal('wikiModal')">Wiki</a></li>
-                <li><a href="#" onclick="openModal('rulesModal')">Regeln</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#team">Team</a></li>
                 <li><a href="https://dsc.gg/farmsucht" target="_blank">Discord</a></li>
                 <li><a href="https://minecraft-server.eu/server/index/23447" target="_blank">Vote</a></li>
             </ul>
@@ -543,8 +513,9 @@
         <div class="mobile-menu" id="mobileMenu">
             <ul>
                 <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
-                <li><a href="#" onclick="openModal('wikiModal'); closeMobileMenu()">Wiki</a></li>
-                <li><a href="#" onclick="openModal('rulesModal'); closeMobileMenu()">Regeln</a></li>
+                <li><a href="#features" onclick="closeMobileMenu()">Features</a></li>
+                <li><a href="#support" onclick="closeMobileMenu()">Support</a></li>
+                <li><a href="#team" onclick="closeMobileMenu()">Team</a></li>
                 <li><a href="https://dsc.gg/farmsucht" target="_blank">Discord</a></li>
                 <li><a href="https://minecraft-server.eu/server/index/23447" target="_blank">Vote</a></li>
             </ul>
@@ -553,7 +524,7 @@
 
     <main>
         <section class="hero" id="home">
-            <div class="hero-content container">
+            <div class="container">
                 <h1>FARMSUCHT.EU</h1>
                 <p>Der ultimative Minecraft CityBuild & PvP Server seit 2022</p>
                 <div class="server-info">
@@ -565,7 +536,6 @@
                     <a href="#" class="btn btn-primary">Jetzt Spielen</a>
                     <a href="https://dsc.gg/farmsucht" target="_blank" class="btn btn-discord">Discord</a>
                     <a href="https://minecraft-server.eu/server/index/23447" target="_blank" class="btn btn-vote">Vote für uns</a>
-                    <a href="#" onclick="openModal('wikiModal')" class="btn btn-secondary">Wiki</a>
                 </div>
             </div>
         </section>
@@ -583,10 +553,6 @@
                         <p>Intensive PvP-Kämpfe mit fairem Gameplay, ausgeglichenen Systemen und spannenden Turnieren für alle Skill-Level.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Punktesystem</h3>
-                        <p>Sammle Punkte durch verschiedene Aktivitäten und steige in den Rängen auf - ein durchdachtes Belohnungssystem motiviert dich täglich.</p>
-                    </div>
-                    <div class="feature-card">
                         <h3>Community</h3>
                         <p>Aktive und freundliche Community seit 2022 mit regelmäßigen Events und professionellem Support-Team.</p>
                     </div>
@@ -601,120 +567,46 @@
                 </div>
             </div>
         </section>
+
+        <section class="support" id="support">
+            <div class="container">
+                <h2 class="section-title">Support & Hilfe</h2>
+                <div class="support-grid">
+                    <div class="support-card">
+                        <h3>Regeln</h3>
+                        <p>Alle aktuellen Server-Regeln findest du in unserem Discord Server.</p>
+                        <a href="https://dsc.gg/farmsucht" target="_blank" class="btn btn-discord">Discord besuchen</a>
+                    </div>
+                    <div class="support-card">
+                        <h3>Hilfe benötigt?</h3>
+                        <p>Hast du Fragen oder brauchst Unterstützung? Erstelle ein Ticket in unserem Discord.</p>
+                        <a href="https://dsc.gg/farmsucht" target="_blank" class="btn btn-secondary">Ticket erstellen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team" id="team">
+            <div class="container">
+                <div class="team-info">
+                    <h2 class="section-title">Werde Teil unseres Teams!</h2>
+                    <h3>Wir suchen Verstärkung</h3>
+                    <p>Du möchtest Teil unseres Teams werden? Wir suchen motivierte Leute für verschiedene Positionen. Bewirb dich einfach über unseren Discord Server!</p>
+                    
+                    <div class="positions">
+                        <div class="position-tag">Developer</div>
+                        <div class="position-tag">Creator</div>
+                        <div class="position-tag">Content</div>
+                        <div class="position-tag">Supporter</div>
+                        <div class="position-tag">Builder</div>
+                        <div class="position-tag">Designer</div>
+                    </div>
+                    
+                    <a href="https://dsc.gg/farmsucht" target="_blank" class="btn btn-primary">Jetzt bewerben</a>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <!-- Wiki Modal -->
-    <div id="wikiModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('wikiModal')">&times;</span>
-            <h2>Farmsucht.eu Wiki</h2>
-            
-            <h3>Punktesystem</h3>
-            <div class="points-system">
-                <h4>Punkte verdienen:</h4>
-                <ul>
-                    <li><strong>Spielzeit:</strong> 1 Punkt pro 30 Minuten Online-Zeit</li>
-                    <li><strong>Voting:</strong> 5 Punkte pro Vote</li>
-                    <li><strong>PvP-Kills:</strong> 3 Punkte pro Kill</li>
-                    <li><strong>Bauen:</strong> 2 Punkte pro Block (bestimmte Materialien)</li>
-                    <li><strong>Events:</strong> 10-50 Punkte je nach Event</li>
-                    <li><strong>Quests:</strong> 5-20 Punkte pro Quest</li>
-                </ul>
-            </div>
-
-            <h3>Shop System</h3>
-            <p>Mit deinen Punkten kannst du im Shop verschiedene Items kaufen:</p>
-            <ul>
-                <li>Baumateriellen und Werkzeuge</li>
-                <li>Spezielle Waffen und Rüstungen</li>
-                <li>Kosmetische Items</li>
-                <li>Rang-Upgrades</li>
-                <li>Spezial-Permissions</li>
-            </ul>
-
-            <h3>CityBuild Guide</h3>
-            <p>So startest du dein CityBuild-Abenteuer:</p>
-            <ul>
-                <li>Verwende <strong>/plot auto</strong> um ein freies Grundstück zu bekommen</li>
-                <li>Baue dein erstes Haus mit <strong>/plot home</strong></li>
-                <li>Lade Freunde ein mit <strong>/plot add [Spieler]</strong></li>
-                <li>Erweitere dein Grundstück mit <strong>/plot merge</strong></li>
-                <li>Verkaufe oder vermiete Plots mit <strong>/plot sell</strong></li>
-            </ul>
-
-            <h3>PvP Tipps</h3>
-            <p>Werde zum PvP-Champion:</p>
-            <ul>
-                <li>Nutze die <strong>/warp pvp</strong> Arena für faire Kämpfe</li>
-                <li>Sammle bessere Ausrüstung durch Siege</li>
-                <li>Trainiere deine Combo-Skills täglich</li>
-                <li>Lerne die Map-Layouts kennen</li>
-                <li>Nutze strategische Positionen</li>
-            </ul>
-
-            <h3>Wichtige Befehle</h3>
-            <ul>
-                <li><strong>/spawn</strong> - Zurück zum Spawn</li>
-                <li><strong>/tpa [Spieler]</strong> - Teleportanfrage senden</li>
-                <li><strong>/home</strong> - Zu deinem Zuhause</li>
-                <li><strong>/balance</strong> - Dein Guthaben anzeigen</li>
-                <li><strong>/shop</strong> - Den Server-Shop öffnen</li>
-                <li><strong>/points</strong> - Deine Punkte anzeigen</li>
-                <li><strong>/vote</strong> - Voting-Links anzeigen</li>
-                <li><strong>/discord</strong> - Discord-Link erhalten</li>
-            </ul>
-
-            <div class="important-note">
-                <strong>Tipp:</strong> Nutze <strong>/help</strong> für eine vollständige Befehlsliste oder frage im Discord nach Hilfe!
-            </div>
-        </div>
-    </div>
-
-    <!-- Rules Modal -->
-    <div id="rulesModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('rulesModal')">&times;</span>
-            <h2>Server Regeln</h2>
-            
-            <h3>Grundregeln</h3>
-            <ul>
-                <li><strong>Respekt:</strong> Behandle alle Spieler mit Respekt</li>
-                <li><strong>Keine Beleidigungen:</strong> Kein Spam, Flame oder toxisches Verhalten</li>
-                <li><strong>Deutsch/Englisch:</strong> Nur diese Sprachen im Chat</li>
-                <li><strong>Kein Griefing:</strong> Zerstöre keine Builds anderer Spieler</li>
-                <li><strong>Keine Werbung:</strong> Keine Werbung für andere Server</li>
-            </ul>
-
-            <h3>PvP Regeln</h3>
-            <ul>
-                <li>Nur in PvP-Zonen kämpfen</li>
-                <li>Kein Teaming in 1vs1 Kämpfen</li>
-                <li>Keine unfairen Vorteile nutzen</li>
-                <li>Respektiere andere Kämpfer</li>
-            </ul>
-
-            <h3>CityBuild Regeln</h3>
-            <ul>
-                <li>Baue nur auf deinen eigenen Plots</li>
-                <li>Keine unangemessenen Builds</li>
-                <li>Halte deine Plots sauber</li>
-                <li>Respektiere Nachbar-Builds</li>
-            </ul>
-
-            <h3>Strafen</h3>
-            <ul>
-                <li><strong>Verwarnung:</strong> Bei kleineren Verstößen</li>
-                <li><strong>Mute:</strong> Bei Chat-Verstößen</li>
-                <li><strong>Kick:</strong> Bei wiederholten Verstößen</li>
-                <li><strong>Tempban:</strong> Bei schweren Verstößen</li>
-                <li><strong>Permban:</strong> Bei extremen Verstößen</li>
-            </ul>
-
-            <div class="important-note">
-                <strong>Wichtig:</strong> Unwissen schützt nicht vor Strafen! Lies die Regeln aufmerksam durch.
-            </div>
-        </div>
-    </div>
 
     <footer>
         <div class="container">
@@ -727,8 +619,9 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <p><a href="#home">Home</a></p>
-                    <p><a href="#" onclick="openModal('wikiModal')">Wiki</a></p>
-                    <p><a href="#" onclick="openModal('rulesModal')">Regeln</a></p>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#support">Support</a></p>
+                    <p><a href="#team">Team</a></p>
                 </div>
                 <div class="footer-section">
                     <h3>Community</h3>
@@ -737,46 +630,13 @@
                     <p>Server IP: farmsucht.eu</p>
                 </div>
             </div>
-            <div class="social-links">
-                <a href="https://dsc.gg/farmsucht" target="_blank">💬</a>
-                <a href="https://minecraft-server.eu/server/index/23447" target="_blank">⭐</a>
-            </div>
-            <p style="margin-top: 2rem; color: var(--text-secondary); text-align: center;">
-                © 2022 farmsucht.eu
+            <p style="margin-top: 2rem; opacity: 0.8;">
+                © 2022 Farmsucht.eu - Alle Rechte vorbehalten
             </p>
         </div>
     </footer>
 
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Modal functions
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
         // Mobile menu functions
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
@@ -817,10 +677,8 @@
             navigator.clipboard.writeText('farmsucht.eu').then(() => {
                 const originalText = this.textContent;
                 this.textContent = 'IP kopiert!';
-                this.style.color = '#27ae60';
                 setTimeout(() => {
                     this.textContent = originalText;
-                    this.style.color = '';
                 }, 2000);
             });
         });
