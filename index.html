@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmsucht.eu - Minecraft CityBuild & PvP Server</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Farmsucht.eu - Minecraft CityBuild & PvP Server">
+    <meta property="og:description" content="Der ultimative Minecraft CityBuild & PvP Server seit 2022. Erlebe das beste Gaming-Erlebnis mit unserer Community! Server IP: farmsucht.eu">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://farmsucht.eu">
+    <meta property="og:image" content="https://farmsucht.eu/preview-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Farmsucht.eu">
+    <meta property="og:locale" content="de_DE">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Farmsucht.eu - Minecraft CityBuild & PvP Server">
+    <meta name="twitter:description" content="Der ultimative Minecraft CityBuild & PvP Server seit 2022. Erlebe das beste Gaming-Erlebnis mit unserer Community!">
+    <meta name="twitter:image" content="https://farmsucht.eu/preview-image.png">
+    
+    <!-- Standard Meta Tags -->
+    <meta name="description" content="Der ultimative Minecraft CityBuild & PvP Server seit 2022. Erlebe das beste Gaming-Erlebnis mit unserer Community! Server IP: farmsucht.eu">
+    <meta name="keywords" content="Minecraft, CityBuild, PvP, Server, Gaming, Community, farmsucht.eu">
+    <meta name="author" content="Farmsucht.eu">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#22c55e">
     <style>
         * {
             margin: 0;
@@ -126,11 +151,50 @@
             border: 1px solid var(--border);
         }
 
-        .server-address {
-            font-size: 2rem;
-            font-weight: 700;
+        .server-platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .platform-card {
+            background: var(--surface-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .platform-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+        }
+
+        .platform-title {
+            font-size: 1.2rem;
+            font-weight: 600;
             color: var(--primary);
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .platform-badge {
+            background: var(--primary);
+            color: var(--bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .server-address {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
             font-family: 'Monaco', monospace;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -140,6 +204,19 @@
         .server-address:hover {
             color: var(--secondary);
             text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .server-port {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-family: 'Monaco', monospace;
+        }
+
+        .copy-hint {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            opacity: 0.8;
         }
 
         .version-badge {
@@ -493,6 +570,14 @@
                 width: 100%;
                 max-width: 280px;
             }
+
+            .server-platforms {
+                grid-template-columns: 1fr;
+            }
+
+            .server-address {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -528,9 +613,34 @@
                 <h1>FARMSUCHT.EU</h1>
                 <p>Der ultimative Minecraft CityBuild & PvP Server seit 2022</p>
                 <div class="server-info">
-                    <div class="server-address" title="Klicken zum Kopieren">farmsucht.eu</div>
+                    <div class="server-platforms">
+                        <div class="platform-card">
+                            <div class="platform-title">
+                                Java Edition
+                                <span class="platform-badge">PC</span>
+                            </div>
+                            <div class="server-address" onclick="copyToClipboard('farmsucht.eu', this)" title="Klicken zum Kopieren">
+                                farmsucht.eu
+                            </div>
+                            <div class="copy-hint">Klicken zum Kopieren</div>
+                        </div>
+                        <div class="platform-card">
+                            <div class="platform-title">
+                                Bedrock Edition
+                                <span class="platform-badge">Mobile/Console</span>
+                            </div>
+                            <div class="server-address" onclick="copyToClipboard('farmsucht.eu', this)" title="Klicken zum Kopieren">
+                                farmsucht.eu
+                            </div>
+                            <div class="server-port">Port: 2704</div>
+                            <div class="copy-hint">IP + Port für Bedrock</div>
+                        </div>
+                    </div>
                     <div class="version-badge">Version 1.21.4</div>
                     <p>Erlebe das beste CityBuild & PvP Erlebnis in Minecraft!</p>
+                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
+                        Unterstützt Java & Bedrock Edition - Spiele mit all deinen Freunden!
+                    </p>
                 </div>
                 <div class="cta-buttons">
                     <a href="#" class="btn btn-primary">Jetzt Spielen</a>
@@ -551,6 +661,10 @@
                     <div class="feature-card">
                         <h3>PvP Action</h3>
                         <p>Intensive PvP-Kämpfe mit fairem Gameplay, ausgeglichenen Systemen und spannenden Turnieren für alle Skill-Level.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cross-Platform</h3>
+                        <p>Spiele mit Freunden auf PC, Mobile und Konsole! Unser Server unterstützt sowohl Java als auch Bedrock Edition.</p>
                     </div>
                     <div class="feature-card">
                         <h3>Community</h3>
@@ -627,7 +741,8 @@
                     <h3>Community</h3>
                     <p><a href="https://dsc.gg/farmsucht" target="_blank">Discord Server</a></p>
                     <p><a href="https://minecraft-server.eu/server/index/23447" target="_blank">Vote für uns</a></p>
-                    <p>Server IP: farmsucht.eu</p>
+                    <p>Java: farmsucht.eu</p>
+                    <p>Bedrock: farmsucht.eu:2704</p>
                 </div>
             </div>
             <p style="margin-top: 2rem; opacity: 0.8;">
@@ -673,15 +788,15 @@
         });
 
         // Copy server address to clipboard
-        document.querySelector('.server-address').addEventListener('click', function() {
-            navigator.clipboard.writeText('farmsucht.eu').then(() => {
-                const originalText = this.textContent;
-                this.textContent = 'IP kopiert!';
+        function copyToClipboard(text, element) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = element.textContent;
+                element.textContent = 'IP kopiert!';
                 setTimeout(() => {
-                    this.textContent = originalText;
+                    element.textContent = originalText;
                 }, 2000);
             });
-        });
+        }
     </script>
 </body>
 </html>
